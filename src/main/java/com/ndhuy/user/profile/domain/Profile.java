@@ -31,8 +31,8 @@ public class Profile {
         return new Profile( name, avatar);
     }
 
-    public void update(Name name, String avatar) {
-        this.name = name;
+    public void update(String name, String avatar) {
+        this.name = new Name(name);
         this.avatar = avatar;
     }
 
