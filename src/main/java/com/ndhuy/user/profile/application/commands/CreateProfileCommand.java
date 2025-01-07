@@ -1,7 +1,7 @@
 package com.ndhuy.user.profile.application.commands;
 
 
-public record CreateProfileCommand(String name, String email) {
+public record CreateProfileCommand(String avatar,String name, String email) {
     public CreateProfileCommand {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
