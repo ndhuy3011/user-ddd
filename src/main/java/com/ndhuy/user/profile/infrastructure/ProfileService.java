@@ -31,6 +31,9 @@ public class ProfileService implements IProfileService {
         addProfile.execute(profile);
         return profile;
     }
+    public Profile searchProfile(String id) {
+        return searchProflie.searchProfile(id);
+    }
 
     @Transactional(readOnly = true)
     public Profile searchProfile(SearchProfileCommand command) {
