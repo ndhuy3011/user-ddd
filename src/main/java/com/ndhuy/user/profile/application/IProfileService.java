@@ -9,4 +9,5 @@ public interface IProfileService {
     Profile createProfile(CreateProfileCommand command);
     Profile updateProfile(UpdateProfileCommand command);
     Profile searchProfile(SearchProfileCommand command);
+    Profile searchProfile(String command);
 }
