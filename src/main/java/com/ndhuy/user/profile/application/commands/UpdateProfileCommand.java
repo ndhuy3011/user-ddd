@@ -2,7 +2,7 @@ package com.ndhuy.user.profile.application.commands;
 
 import java.util.UUID;
 
-public record UpdateProfileCommand(UUID id,String name, String email) {
+public record UpdateProfileCommand(UUID id,String name, String email,String avatar) {
     public UpdateProfileCommand {
         if (id == null) {
             throw new IllegalArgumentException("Id cannot be null");
