@@ -1,5 +1,6 @@
-package com.ndhuy.user.profile.infrastructure;
+package com.ndhuy.user.profile.infrastructure.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class ProfileController {
 
     @PostMapping("/create")
     public ResponseEntity<Profile> postCreateProfile(@RequestBody CreateProfileCommand entity) {
-        return ResponseEntity.ok(profileService.createProfile(entity));
+        return ResponseEntity.status(HttpStatus.CREATED).body(profileService.createProfile(entity));
     }
 
     @PostMapping("/update")

@@ -1,5 +1,7 @@
 package com.ndhuy.user.profile.application;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.UserCase;
@@ -16,5 +18,10 @@ public class UpdateProfile implements IApplication<Profile> {
     @Transactional
     public void execute(Profile profile) {
         profileRepository.save(profile);
+    }
+
+    @Override
+    public CompletableFuture<Void> executeAsync(Profile profile) {
+        throw new UnsupportedOperationException("Unimplemented method 'executeAsync'");
     }
 }

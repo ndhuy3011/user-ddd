@@ -1,11 +1,12 @@
 package com.ndhuy.user.profile.infrastructure;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.profile.application.AddProfile;
 import com.ndhuy.user.profile.application.AddResidence;
-import com.ndhuy.user.profile.application.IApplication;
 import com.ndhuy.user.profile.application.IUserService;
 import com.ndhuy.user.profile.application.commands.CreateUserCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
@@ -13,10 +14,15 @@ import com.ndhuy.user.profile.domain.Profile;
 import com.ndhuy.user.profile.domain.ProfileId;
 import com.ndhuy.user.profile.domain.Residence;
 
+import jakarta.annotation.Resource;
+
 @Service
 public class UserService implements IUserService {
-    private final IApplication<Residence> addResidence = new AddResidence();
-    private final IApplication<Profile> addProfile = new AddProfile();
+
+    @Resource
+    private AddResidence addResidence;
+    @Resource
+    private AddProfile addProfile;
 
     @Override
     public InfoUserCommand getUserInfo(String id) {
@@ -26,15 +32,12 @@ public class UserService implements IUserService {
     @Transactional
     public InfoUserCommand creatUser(CreateUserCommand command) {
         var id = ProfileId.generate();
-        
-        var profile = Profile.create(id, command.profile().name(), command.profile().avatar(), command.profile().email());
-        addProfile.execute(profile);
-
+        var profile = Profile.create(id, command.profile().name(), command.profile().avatar(),
+                command.profile().email());
         var residence = Residence.create(id, command.residence().title(), command.residence().address());
-        addResidence.execute(residence);
-        
-        return new InfoUserCommand(profile, residence);  
-        
+        CompletableFuture.allOf(addProfile.executeAsync(profile), addResidence.executeAsync(residence));
+        return new InfoUserCommand(profile, residence);
+
     }
-    
+
 }
