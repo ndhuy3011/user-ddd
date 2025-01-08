@@ -1,5 +1,6 @@
 package com.ndhuy.user.profile.application;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.profile.domain.Profile;
@@ -8,6 +9,8 @@ import com.ndhuy.user.profile.domain.ProfileRepository;
 
 import jakarta.annotation.Resource;
 
+
+@Service
 public class SearchProflie {
     @Resource
     ProfileRepository profileRepository;
