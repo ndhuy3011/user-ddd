@@ -23,6 +23,6 @@ public class UpdateProfile implements IApplication<Profile> {
 
     @Override
     public CompletableFuture<Void> executeAsync(Profile profile) {
-        throw new UnsupportedOperationException("Unimplemented method 'executeAsync'");
+        return CompletableFuture.runAsync(() ->  profileRepository.save(profile));
     }
 }
