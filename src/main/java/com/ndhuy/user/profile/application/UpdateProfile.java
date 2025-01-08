@@ -9,7 +9,7 @@ import com.ndhuy.user.profile.domain.ProfileRepository;
 import jakarta.annotation.Resource;
 
 @UserCase
-public class UpdateProfile {
+public class UpdateProfile implements IApplication<Profile> {
     @Resource
     ProfileRepository profileRepository;
 

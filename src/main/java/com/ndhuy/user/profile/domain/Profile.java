@@ -40,6 +40,17 @@ public class Profile {
         this.email = new Email(email);
     }
 
+    private Profile(ProfileId id, String name, String avatar, String email) {
+        this.id = id;
+        this.name = new Name(name);
+        this.avatar = avatar;
+        this.email = new Email(email);
+    }
+
+    public static Profile create(ProfileId id, String name, String avatar, String email) {
+        return new Profile(id, name, avatar, email);
+    }
+
     public static Profile create(String name, String avatar, String email) {
         return new Profile(name, avatar, email);
     }
