@@ -4,12 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.profile.application.AddProfile;
-import com.ndhuy.user.profile.application.IProfileService;
 import com.ndhuy.user.profile.application.SearchProflie;
 import com.ndhuy.user.profile.application.UpdateProfile;
 import com.ndhuy.user.profile.application.commands.CreateProfileCommand;
 import com.ndhuy.user.profile.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profile.application.commands.UpdateProfileCommand;
+import com.ndhuy.user.profile.application.interfaces.IProfileService;
 import com.ndhuy.user.profile.domain.Profile;
 
 import jakarta.annotation.Resource;

@@ -7,9 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.profile.application.AddProfile;
 import com.ndhuy.user.profile.application.AddResidence;
-import com.ndhuy.user.profile.application.IUserService;
 import com.ndhuy.user.profile.application.commands.CreateUserCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
+import com.ndhuy.user.profile.application.interfaces.IAddUser;
+import com.ndhuy.user.profile.application.interfaces.ISearchUser;
 import com.ndhuy.user.profile.domain.Profile;
 import com.ndhuy.user.profile.domain.ProfileId;
 import com.ndhuy.user.profile.domain.Residence;
@@ -17,7 +18,7 @@ import com.ndhuy.user.profile.domain.Residence;
 import jakarta.annotation.Resource;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IAddUser,ISearchUser {
 
     @Resource
     private AddResidence addResidence;

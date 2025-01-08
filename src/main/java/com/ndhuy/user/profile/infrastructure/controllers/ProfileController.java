@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ndhuy.user.profile.application.IProfileService;
 import com.ndhuy.user.profile.application.commands.CreateProfileCommand;
 import com.ndhuy.user.profile.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profile.application.commands.UpdateProfileCommand;
+import com.ndhuy.user.profile.application.interfaces.IProfileService;
 import com.ndhuy.user.profile.domain.Profile;
 
 import jakarta.annotation.Resource;

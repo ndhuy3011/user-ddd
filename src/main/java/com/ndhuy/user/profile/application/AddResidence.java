@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ndhuy.user.profile.application.interfaces.IApplication;
 import com.ndhuy.user.profile.domain.Residence;
 import com.ndhuy.user.profile.domain.ResidenceRepository;
 

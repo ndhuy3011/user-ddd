@@ -1,4 +1,4 @@
-package com.ndhuy.user.profile.application;
+package com.ndhuy.user.profile.application.interfaces;
 
 import com.ndhuy.user.profile.application.commands.CreateProfileCommand;
 import com.ndhuy.user.profile.application.commands.SearchProfileCommand;

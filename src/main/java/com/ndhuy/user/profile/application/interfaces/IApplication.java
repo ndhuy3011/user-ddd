@@ -1,4 +1,4 @@
-package com.ndhuy.user.profile.application;
+package com.ndhuy.user.profile.application.interfaces;
 
 import java.util.concurrent.CompletableFuture;
 

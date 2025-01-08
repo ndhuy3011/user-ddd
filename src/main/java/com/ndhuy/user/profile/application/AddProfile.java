@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.UserCase;
+import com.ndhuy.user.profile.application.interfaces.IApplication;
 import com.ndhuy.user.profile.domain.Profile;
 import com.ndhuy.user.profile.domain.ProfileRepository;
 

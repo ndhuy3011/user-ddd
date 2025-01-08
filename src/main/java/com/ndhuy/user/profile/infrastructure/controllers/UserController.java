@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ndhuy.user.profile.application.IUserService;
 import com.ndhuy.user.profile.application.commands.CreateUserCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
+import com.ndhuy.user.profile.application.interfaces.IAddUser;
 
 import jakarta.annotation.Resource;
 
@@ -16,12 +16,12 @@ import jakarta.annotation.Resource;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Resource IUserService userService;
+    @Resource IAddUser addUser;
 
 
     @PostMapping("/create")
     public ResponseEntity<InfoUserCommand> postCreateUser(@RequestBody CreateUserCommand command) {
-        return ResponseEntity.status(201).body(userService.creatUser(command)) ;
+        return ResponseEntity.status(201).body(addUser.creatUser(command)) ;
     }
     
 }
