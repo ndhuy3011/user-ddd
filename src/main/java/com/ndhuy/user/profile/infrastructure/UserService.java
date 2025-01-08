@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.profile.application.AddProfile;
 import com.ndhuy.user.profile.application.AddResidence;
+import com.ndhuy.user.profile.application.SearchProflie;
+import com.ndhuy.user.profile.application.SearchResidence;
 import com.ndhuy.user.profile.application.commands.CreateUserCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
 import com.ndhuy.user.profile.application.interfaces.IAddUser;
@@ -18,16 +20,27 @@ import com.ndhuy.user.profile.domain.Residence;
 import jakarta.annotation.Resource;
 
 @Service
-public class UserService implements IAddUser,ISearchUser {
+public class UserService implements IAddUser, ISearchUser {
 
     @Resource
     private AddResidence addResidence;
     @Resource
     private AddProfile addProfile;
+    @Resource
+    private SearchProflie searchProflie;
+    @Resource
+    private SearchResidence searchResidence;
 
-    @Override
+    @Transactional(readOnly = true)
     public InfoUserCommand getUserInfo(String id) {
-        throw new UnsupportedOperationException("Unimplemented method 'getUserInfo'");
+
+        return CompletableFuture.allOf(
+                searchProflie.searchProfileAsync(id),
+                searchResidence.searchResidenceAsync(id)).thenApply(
+                        ignored -> new InfoUserCommand(
+                                searchProflie.searchProfileAsync(id).join(),
+                                searchResidence.searchResidenceAsync(id).join()))
+                .join();
     }
 
     @Transactional
@@ -36,7 +49,7 @@ public class UserService implements IAddUser,ISearchUser {
         var profile = Profile.create(id, command.profile().name(), command.profile().avatar(),
                 command.profile().email());
         var residence = Residence.create(id, command.residence().title(), command.residence().address());
-        CompletableFuture.allOf(addProfile.executeAsync(profile), addResidence.executeAsync(residence));
+        CompletableFuture.allOf(addProfile.executeAsync(profile), addResidence.executeAsync(residence)).join();
         return new InfoUserCommand(profile, residence);
 
     }

@@ -9,6 +9,7 @@ public record CreateProfileCommand(String avatar,String name, String email) {
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be empty");
         }
+    
     }
 
 

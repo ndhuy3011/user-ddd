@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ndhuy.user.profile.application.commands.CreateUserCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
+import com.ndhuy.user.profile.application.commands.SearchUserCommand;
 import com.ndhuy.user.profile.application.interfaces.IAddUser;
+import com.ndhuy.user.profile.application.interfaces.ISearchUser;
 
 import jakarta.annotation.Resource;
 
@@ -18,10 +20,15 @@ import jakarta.annotation.Resource;
 public class UserController {
     @Resource IAddUser addUser;
 
+    @Resource ISearchUser searchUser;
 
     @PostMapping("/create")
     public ResponseEntity<InfoUserCommand> postCreateUser(@RequestBody CreateUserCommand command) {
         return ResponseEntity.status(201).body(addUser.creatUser(command)) ;
+    }
+    @PostMapping("/info")
+    public ResponseEntity<InfoUserCommand> postUserInfo(@RequestBody SearchUserCommand command) {
+        return ResponseEntity.ok(searchUser.getUserInfo(command.id()));
     }
     
 }
