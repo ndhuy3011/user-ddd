@@ -2,16 +2,17 @@ package com.ndhuy.user.profile.application;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ndhuy.user.profile.application.interfaces.IApplication;
+import com.ndhuy.user.UserCase;
+import com.ndhuy.user.interfaces.IApplication;
 import com.ndhuy.user.profile.domain.Residence;
 import com.ndhuy.user.profile.domain.ResidenceRepository;
 
 import jakarta.annotation.Resource;
 
-@Service
+@UserCase
 public class AddResidence implements IApplication<Residence> {
     @Resource
     private ResidenceRepository residenceRepository;
@@ -20,6 +21,7 @@ public class AddResidence implements IApplication<Residence> {
     public void execute(Residence entity) {
         residenceRepository.save(entity);
     }
+
 
     @Transactional
     public CompletableFuture<Void> executeAsync(Residence residence) {
