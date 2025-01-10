@@ -1,12 +1,14 @@
 package com.ndhuy.user.auth.domain;
 
+import com.ndhuy.user.exceptions.BadRequestException;
+
 public record UserNameId(String username) {
     public UserNameId {
         if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username is required");
+            throw new BadRequestException("ERR007");
         }
         if (username.length() < 6) {
-            throw new IllegalArgumentException("Username must be at least 6 characters");
+            throw new BadRequestException("ERR008");
         }
 
     }

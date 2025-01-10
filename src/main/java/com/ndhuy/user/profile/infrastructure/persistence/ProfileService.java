@@ -5,7 +5,6 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ndhuy.user.auth.application.command.CreateUserCommand;
 import com.ndhuy.user.profile.application.AddProfile;
 import com.ndhuy.user.profile.application.AddResidence;
 import com.ndhuy.user.profile.application.SearchProflie;
