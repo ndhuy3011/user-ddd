@@ -1,4 +1,4 @@
-package com.ndhuy.user.auth.infrastructure;
+package com.ndhuy.user.auth.infrastructure.persistence;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,13 +7,14 @@ import com.ndhuy.user.auth.application.AddUser;
 import com.ndhuy.user.auth.application.SearchUser;
 import com.ndhuy.user.auth.application.command.CreateUserCommand;
 import com.ndhuy.user.auth.application.command.InfoUserCommand;
+import com.ndhuy.user.auth.application.interfaces.IAuthenService;
 import com.ndhuy.user.auth.domain.Username;
 import com.ndhuy.user.exceptions.BadRequestException;
 
 import jakarta.annotation.Resource;
 
 @Service
-public class AuthenticatedUserService {
+public class AuthenticatedUserService implements IAuthenService {
     @Resource
     AddUser addUser;
     @Resource
