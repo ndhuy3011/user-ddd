@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ndhuy.user.profile.application.commands.CreateProfileCommand;
-import com.ndhuy.user.profile.application.commands.CreateUserCommand;
+import com.ndhuy.user.profile.application.commands.CreateUserProfileCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
 import com.ndhuy.user.profile.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profile.application.commands.SearchUserCommand;
@@ -25,7 +25,7 @@ public class ProfileController {
     private IProfileService profile;
 
     @PostMapping("/create")
-    public ResponseEntity<InfoUserCommand> postCreateUser(@RequestBody CreateUserCommand command) {
+    public ResponseEntity<InfoUserCommand> postCreateUser(@RequestBody CreateUserProfileCommand command) {
         return ResponseEntity.status(201).body(profile.creatProfile(command));
     }
 

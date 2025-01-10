@@ -5,13 +5,14 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ndhuy.user.auth.application.command.CreateUserCommand;
 import com.ndhuy.user.profile.application.AddProfile;
 import com.ndhuy.user.profile.application.AddResidence;
 import com.ndhuy.user.profile.application.SearchProflie;
 import com.ndhuy.user.profile.application.SearchResidence;
 import com.ndhuy.user.profile.application.UpdateProfile;
 import com.ndhuy.user.profile.application.commands.CreateProfileCommand;
-import com.ndhuy.user.profile.application.commands.CreateUserCommand;
+import com.ndhuy.user.profile.application.commands.CreateUserProfileCommand;
 import com.ndhuy.user.profile.application.commands.InfoUserCommand;
 import com.ndhuy.user.profile.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profile.application.commands.UpdateProfileCommand;
@@ -52,7 +53,7 @@ public class ProfileService implements IProfileService {
     }
 
     @Override
-    public InfoUserCommand creatProfile(CreateUserCommand command) {
+    public InfoUserCommand creatProfile(CreateUserProfileCommand command) {
         var id = ProfileId.generate();
         var profile = Profile.create(id, command.profile().name(), command.profile().avatar(),
                 command.profile().email());

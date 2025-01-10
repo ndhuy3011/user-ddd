@@ -1,5 +1,7 @@
 package com.ndhuy.user.auth.application.command;
 
+
+
 public record CreateUserCommand(String username,String password,String email,String phone,String fullName) {
     public CreateUserCommand {
         if (username == null || username.isBlank()) {
