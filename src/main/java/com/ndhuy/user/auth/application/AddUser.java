@@ -1,4 +1,4 @@
-package com.ndhuy.user.auth.domain.application;
+package com.ndhuy.user.auth.application;
 
 import java.util.concurrent.CompletableFuture;
 

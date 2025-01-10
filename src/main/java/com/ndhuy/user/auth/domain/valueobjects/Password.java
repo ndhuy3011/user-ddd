@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
 
 public record Password(String value) {
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(BCryptVersion.$2Y);
     public Password {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("Password is required");
@@ -12,7 +13,7 @@ public record Password(String value) {
             throw new IllegalArgumentException("Password must be at least 6 characters");
         }
 
-        value = new BCryptPasswordEncoder(BCryptVersion.$2Y).encode(value);
+        value = encoder.encode(value);
 
     }
 
@@ -21,7 +22,7 @@ public record Password(String value) {
     }
 
     public boolean match(String rawPassword) {
-        return new BCryptPasswordEncoder(BCryptVersion.$2Y).matches(rawPassword, value);
+        return encoder.matches(rawPassword, value);
     }
 
 }
