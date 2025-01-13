@@ -12,16 +12,29 @@ import com.ndhuy.user.profile.domain.ProfileRepository;
 import jakarta.annotation.Resource;
 
 @UserCase
+@Transactional
 public class AddProfile implements IApplication<Profile> {
     @Resource
     ProfileRepository profileRepository;
 
-    @Transactional
+    /**
+     * @param Profile
+     * @return void
+     * @ndhuy3011 Add profile
+     */
+    @Override
+
     public void execute(Profile profile) {
         profileRepository.save(profile);
     }
 
-    @Transactional
+    /**
+     * @param Profile
+     * @return CompletableFuture<Void>
+     * @ndhuy3011 Add profile
+     */
+
+    @Override
     public CompletableFuture<Void> executeAsync(Profile profile) {
         return CompletableFuture.runAsync(() -> profileRepository.save(profile));
     }

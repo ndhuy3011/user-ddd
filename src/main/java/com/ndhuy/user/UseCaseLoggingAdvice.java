@@ -12,13 +12,11 @@ import org.springframework.util.StopWatch;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Component
 @Aspect
 @Order(1)
 @Slf4j
 public class UseCaseLoggingAdvice {
-  
 
     @Pointcut("within(@library.UseCase *)")
     public void useCase() {
@@ -32,16 +30,25 @@ public class UseCaseLoggingAdvice {
     public void publicMethodInsideAUseCase() {
     }
 
+    /**
+     * Advice that logs the execution time of the use case
+     * 
+     * @param pjp
+     * @return Object
+     * @throws Throwable
+     */
     @Around("publicMethodInsideAUseCase()")
     public Object aroundServiceMethodAdvice(final ProceedingJoinPoint pjp) throws Throwable {
         StopWatch stopWatch = new StopWatch();
         try {
-            log.info("Executing use case: {}#{} with parameters: {}", pjp.getTarget().getClass(), pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));
+            log.info("Executing use case: {}#{} with parameters: {}", pjp.getTarget().getClass(),
+                    pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));
             stopWatch.start();
             return pjp.proceed();
         } finally {
             stopWatch.stop();
-            log.info("Finished executing use case {}#{} in {}ms", pjp.getTarget().getClass(), pjp.getSignature().getName(), stopWatch.getTotalTimeMillis());
+            log.info("Finished executing use case {}#{} in {}ms", pjp.getTarget().getClass(),
+                    pjp.getSignature().getName(), stopWatch.getTotalTimeMillis());
         }
     }
 }

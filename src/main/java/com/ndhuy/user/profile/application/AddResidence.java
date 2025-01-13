@@ -12,17 +12,30 @@ import com.ndhuy.user.profile.domain.ResidenceRepository;
 import jakarta.annotation.Resource;
 
 @UserCase
+@Transactional
 public class AddResidence implements IApplication<Residence> {
     @Resource
     private ResidenceRepository residenceRepository;
 
-    @Transactional
+    /**
+     * @param Residence
+     * @return void
+     * @ndhuy3011 Add residence
+     */
+    
+    @Override
     public void execute(Residence entity) {
         residenceRepository.save(entity);
     }
 
 
-    @Transactional
+    /**
+     * @param Residence
+     * @return CompletableFuture<Void>
+     * @ndhuy3011 Add residence
+     */
+
+    @Override
     public CompletableFuture<Void> executeAsync(Residence residence) {
         return CompletableFuture.runAsync(() -> residenceRepository.save(residence));
     }

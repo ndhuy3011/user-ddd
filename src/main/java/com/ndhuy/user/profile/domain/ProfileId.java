@@ -9,10 +9,19 @@ public record ProfileId(UUID id) {
         }
     }
 
+    /**
+     * Generate a new ProfileId
+     * @return ProfileId
+     */
     public static ProfileId generate() {
         return new ProfileId(UUID.randomUUID());
     }
 
+    /**
+     * Create a ProfileId from a string
+     * @param id
+     * @return
+     */
     public static ProfileId fromString(String id) {
         return new ProfileId(UUID.fromString(id));
     }

@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.UserCase;
+import com.ndhuy.user.auth.domain.User;
 import com.ndhuy.user.auth.domain.UserNameId;
-import com.ndhuy.user.auth.domain.Username;
-import com.ndhuy.user.auth.domain.UsernameRepository;
+import com.ndhuy.user.auth.domain.UserRepository;
 
 import jakarta.annotation.Resource;
 
@@ -15,18 +15,27 @@ import jakarta.annotation.Resource;
 @Transactional(readOnly = true)
 public class SearchUser {
     @Resource
-    UsernameRepository usernameRepository;
+    UserRepository userRepository;
 
-    
+    /**
+     * 
+     * @param username
+     * @return boolean
+     */
     public boolean usernameExistsById(String username) {
-        return usernameRepository.existsById(UserNameId.generate(username));
+        return userRepository.existsById(UserNameId.generate(username));
     }
 
-    public Username getUsername(String username) {
-        return usernameRepository.findById(UserNameId.generate(username)).orElseThrow();
+    /**
+     * 
+     * @param username
+     * @return Username
+     */
+    public User getUsername(String username) {
+        return userRepository.findById(UserNameId.generate(username)).orElseThrow();
     }
-    public Username getUsername(UUID uuid) {
-        return usernameRepository.findByUuid(uuid).orElseThrow();
+    public User getUsername(UUID uuid) {
+        return userRepository.findByUuid(uuid).orElseThrow();
     }
 
 }

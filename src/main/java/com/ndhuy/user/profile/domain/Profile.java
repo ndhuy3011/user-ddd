@@ -47,6 +47,7 @@ public class Profile {
         this.email = new Email(email);
     }
 
+
     public static Profile create(ProfileId id, String name, String avatar, String email) {
         return new Profile(id, name, avatar, email);
     }

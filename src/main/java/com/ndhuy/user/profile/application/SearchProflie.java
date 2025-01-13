@@ -17,7 +17,13 @@ public class SearchProflie {
     @Resource
     ProfileRepository profileRepository;
 
- 
+    /**
+     * 
+     * @param id
+     * @param email
+     * @param name
+     * @return Profile
+     */
     public Profile searchProfile(String id, String email, String name) {
         return profileRepository.findBySearchProfifle(
                 ProfileId.fromString(id),
@@ -26,10 +32,20 @@ public class SearchProflie {
 
     }
 
+    /**
+     * 
+     * @param id
+     * @return Profile
+     */
     public Profile searchProfile(String id) {
         return profileRepository.findById(ProfileId.fromString(id)).orElseThrow();
     }
 
+    /**
+     * 
+     * @param id
+     * @return CompletableFuture<Profile>
+     */
     public CompletableFuture<Profile> searchProfileAsync(String id) {
         return CompletableFuture.supplyAsync(() -> profileRepository.findById(ProfileId.fromString(id)).orElseThrow());
     }

@@ -5,6 +5,6 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsernameRepository  extends JpaRepository<Username, UserNameId> {
-   Optional<Username> findByUuid(UUID uuid);
+public interface UserRepository  extends JpaRepository<User, UserNameId> {
+   Optional<User> findByUuid(UUID uuid);
 }

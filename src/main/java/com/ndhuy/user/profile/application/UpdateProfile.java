@@ -17,10 +17,22 @@ public class UpdateProfile implements IApplication<Profile> {
     @Resource
     ProfileRepository profileRepository;
 
+    /**
+     * @param Profile
+     * @return void
+     */
+
+    @Override
     public void execute(Profile profile) {
         profileRepository.save(profile);
     }
 
+    /**
+     * @param Profile
+     * @return CompletableFuture<Void>
+     * 
+     */
+    @Override
     public CompletableFuture<Void> executeAsync(Profile profile) {
         return CompletableFuture.runAsync(() -> profileRepository.save(profile));
     }

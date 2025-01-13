@@ -8,7 +8,7 @@ import com.ndhuy.user.auth.application.SearchUser;
 import com.ndhuy.user.auth.application.command.CreateUserCommand;
 import com.ndhuy.user.auth.application.command.InfoUserCommand;
 import com.ndhuy.user.auth.application.interfaces.IAuthenService;
-import com.ndhuy.user.auth.domain.Username;
+import com.ndhuy.user.auth.domain.User;
 import com.ndhuy.user.exceptions.BadRequestException;
 
 import jakarta.annotation.Resource;
@@ -25,7 +25,7 @@ public class AuthenticatedUserService implements IAuthenService {
         if (searchUser.usernameExistsById(command.username())) {
             throw new BadRequestException("ERR006");
         }
-        var entity = Username.create(command.username(), command.password(), command.email(), null, command.phone(),
+        var entity = User.create(command.username(), command.password(), command.email(), null, command.phone(),
                 null, command.fullName());
         addUser.execute(entity);
         return new InfoUserCommand(entity.getUuid());

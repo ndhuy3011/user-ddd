@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Username {
+public class User {
 
     @EmbeddedId
     @AttributeOverride(name = "username", column = @jakarta.persistence.Column(name = "username"))
@@ -61,7 +61,7 @@ public class Username {
     @Version
     private Long version;
 
-    private Username(UserNameId usernameId, Password password, Email email, String avatar, Phone phone, String address,
+    private User(UserNameId usernameId, Password password, Email email, String avatar, Phone phone, String address,
             Name fullName) {
         this.uuid = UUID.randomUUID();
         this.usernameId = usernameId;
@@ -74,9 +74,9 @@ public class Username {
         this.fullName = fullName;
     }
 
-    public static Username create(String username, String password, String email, String avatar, String phone,
+    public static User create(String username, String password, String email, String avatar, String phone,
             String address, String fullName) {
-        return new Username(UserNameId.generate(username), new Password(password), new Email(email),
+        return new User(UserNameId.generate(username), new Password(password), new Email(email),
                 avatar, new Phone(phone), address, new Name(fullName));
     }
 
