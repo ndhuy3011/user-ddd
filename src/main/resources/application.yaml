@@ -1,6 +1,12 @@
 server:
   port: 9090
+  
+grpc:
+    server:
+        port: 7091
 spring:
+    main:
+        allow-bean-definition-overriding: true 
     application:
         name: user
     datasource:
