@@ -4,8 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ndhuy.user.IEntitySave;
 import com.ndhuy.user.UserCase;
-import com.ndhuy.user.interfaces.IApplication;
 import com.ndhuy.user.profiles.domain.Profile;
 import com.ndhuy.user.profiles.domain.ProfileRepository;
 
@@ -13,7 +13,7 @@ import jakarta.annotation.Resource;
 
 @UserCase
 @Transactional
-public class AddProfile implements IApplication<Profile> {
+public class AddProfile implements IEntitySave<Profile> {
     @Resource
     ProfileRepository profileRepository;
 
