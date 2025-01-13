@@ -1,5 +1,8 @@
 package com.ndhuy.user.users.infrastructure.persistence;
 
+import com.ndhuy.proto_library.user.UserProto.AuthRequest;
+import com.ndhuy.proto_library.user.UserProto.AuthResponse;
+import com.ndhuy.proto_library.user.UserServiceGrpc;
 import com.ndhuy.user.exceptions.BadRequestException;
 import com.ndhuy.user.users.application.SearchUser;
 

@@ -31,11 +31,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-<dependency>
-  <groupId>net.devh</groupId>
-  <artifactId>grpc-spring-boot-starter</artifactId>
-  <version>3.1.0.RELEASE</version>
-</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -68,7 +64,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
