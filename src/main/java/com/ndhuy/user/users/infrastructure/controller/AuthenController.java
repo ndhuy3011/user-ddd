@@ -1,4 +1,4 @@
-package com.ndhuy.user.users.infrastructure.https;
+package com.ndhuy.user.users.infrastructure.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import jakarta.annotation.Resource;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthenHttp {
+public class AuthenController {
     @Resource
     IAuthenService authenService;
 

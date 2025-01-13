@@ -1,7 +1,8 @@
 package com.ndhuy.user.users.application.command;
 
+import lombok.Builder;
 
-
+@Builder
 public record CreateUserCommand(String username,String password,String email,String phone,String fullName) {
     public CreateUserCommand {
         if (username == null || username.isBlank()) {
@@ -20,5 +21,6 @@ public record CreateUserCommand(String username,String password,String email,Str
             throw new IllegalArgumentException("Full name is required");
         }
     }
+
     
 }
