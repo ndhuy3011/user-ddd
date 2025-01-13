@@ -8,6 +8,7 @@ import com.ndhuy.user.UserCase;
 import com.ndhuy.user.auth.domain.User;
 import com.ndhuy.user.auth.domain.UserNameId;
 import com.ndhuy.user.auth.domain.UserRepository;
+import com.ndhuy.user.exceptions.BadRequestException;
 
 import jakarta.annotation.Resource;
 
@@ -32,10 +33,12 @@ public class SearchUser {
      * @return Username
      */
     public User getUsername(String username) {
-        return userRepository.findById(UserNameId.generate(username)).orElseThrow();
+        return userRepository.findById(UserNameId.generate(username))
+                .orElseThrow(() -> new BadRequestException("ERR004"));
     }
+
     public User getUsername(UUID uuid) {
-        return userRepository.findByUuid(uuid).orElseThrow();
+        return userRepository.findByUuid(uuid).orElseThrow(() -> new BadRequestException("ERR004"));
     }
 
 }

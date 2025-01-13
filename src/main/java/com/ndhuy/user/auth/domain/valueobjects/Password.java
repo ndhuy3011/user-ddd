@@ -12,10 +12,13 @@ public record Password(String value) {
         if (value.length() < 6) {
             throw new IllegalArgumentException("Password must be at least 6 characters");
         }
-
-        if(encoder.upgradeEncoding(value)){
+        // Check if the password needs to be upgraded
+        try{
+            encoder.upgradeEncoding(value);
+        }catch(Exception e){
             value = encoder.encode(value);
         }
+
        
 
     }

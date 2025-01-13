@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table
+@Table(name = "u_residence")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Residence {
 
     String addressResidence;
 
-    
+
     public static Residence create(ProfileId id, String titleResidence, String addressResidence) {
         return new Residence(id, titleResidence, addressResidence);
     }
