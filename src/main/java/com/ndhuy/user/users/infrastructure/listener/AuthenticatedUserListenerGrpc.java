@@ -1,4 +1,4 @@
-package com.ndhuy.user.users.infrastructure.grpc;
+package com.ndhuy.user.users.infrastructure.listener;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ import jakarta.annotation.Resource;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class AuthenticatedUserGrpc extends UserServiceGrpc.UserServiceImplBase {
+public class AuthenticatedUserListenerGrpc extends UserServiceGrpc.UserServiceImplBase {
     @Resource
     IAuthenService authenService;
 
