@@ -8,14 +8,14 @@ import com.ndhuy.proto_library.user.UserProto.RegisterReponse;
 import com.ndhuy.proto_library.user.UserProto.RegisterRequest;
 import com.ndhuy.proto_library.user.UserServiceGrpc;
 import com.ndhuy.user.users.application.command.CreateUserCommand;
-import com.ndhuy.user.users.application.interfaces.IAuthenService;
+import com.ndhuy.user.users.infrastructure.services.IAuthenService;
 
 import io.grpc.stub.StreamObserver;
 import jakarta.annotation.Resource;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class AuthenticatedUserListenerGrpc extends UserServiceGrpc.UserServiceImplBase {
+public class UserListenerGrpc extends UserServiceGrpc.UserServiceImplBase {
     @Resource
     IAuthenService authenService;
 

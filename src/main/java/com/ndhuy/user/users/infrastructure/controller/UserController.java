@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ndhuy.user.users.application.command.CreateUserCommand;
 import com.ndhuy.user.users.application.command.InfoUserCommand;
 import com.ndhuy.user.users.application.command.LoginCommand;
-import com.ndhuy.user.users.application.interfaces.IAuthenService;
+import com.ndhuy.user.users.infrastructure.services.IAuthenService;
 
 import jakarta.annotation.Resource;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthenController {
+@RequestMapping("/user")
+public class UserController {
     @Resource
     IAuthenService authenService;
 
