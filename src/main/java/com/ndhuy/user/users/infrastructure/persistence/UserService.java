@@ -8,13 +8,13 @@ import com.ndhuy.user.users.application.AddUser;
 import com.ndhuy.user.users.application.SearchUser;
 import com.ndhuy.user.users.application.command.CreateUserCommand;
 import com.ndhuy.user.users.application.command.InfoUserCommand;
-import com.ndhuy.user.users.infrastructure.services.IAuthenService;
 import com.ndhuy.user.users.domain.User;
+import com.ndhuy.user.users.infrastructure.services.IUserService;
 
 import jakarta.annotation.Resource;
 
 @Service
-public class UserService implements IAuthenService {
+public class UserService implements IUserService {
     @Resource
     AddUser addUser;
     @Resource

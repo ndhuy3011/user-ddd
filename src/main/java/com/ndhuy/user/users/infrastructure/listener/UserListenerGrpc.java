@@ -8,7 +8,7 @@ import com.ndhuy.proto_library.user.UserProto.RegisterReponse;
 import com.ndhuy.proto_library.user.UserProto.RegisterRequest;
 import com.ndhuy.proto_library.user.UserServiceGrpc;
 import com.ndhuy.user.users.application.command.CreateUserCommand;
-import com.ndhuy.user.users.infrastructure.services.IAuthenService;
+import com.ndhuy.user.users.infrastructure.services.IUserService;
 
 import io.grpc.stub.StreamObserver;
 import jakarta.annotation.Resource;
@@ -17,7 +17,7 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @GrpcService
 public class UserListenerGrpc extends UserServiceGrpc.UserServiceImplBase {
     @Resource
-    IAuthenService authenService;
+    IUserService authenService;
 
     /**
      * @ndhuy3011
@@ -28,7 +28,6 @@ public class UserListenerGrpc extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void authenticate(AuthRequest request, StreamObserver<AuthResponse> responseObserver) {
         var entity = authenService.login(request.getUsername(), request.getPassword());
-       
 
         var response = AuthResponse.newBuilder()
                 .setUuid(entity.id().toString())
