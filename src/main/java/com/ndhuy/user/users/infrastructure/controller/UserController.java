@@ -1,5 +1,7 @@
 package com.ndhuy.user.users.infrastructure.controller;
 
+import com.ndhuy.user.users.application.command.VerifyUsernameAndPasswordCommand;
+import com.ndhuy.user.users.infrastructure.services.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ndhuy.user.users.application.command.CreateUserCommand;
 import com.ndhuy.user.users.application.command.InfoUserCommand;
-import com.ndhuy.user.users.application.command.LoginCommand;
-import com.ndhuy.user.users.infrastructure.services.IAuthenService;
 
 import jakarta.annotation.Resource;
 
@@ -17,20 +17,20 @@ import jakarta.annotation.Resource;
 @RequestMapping("/user")
 public class UserController {
     @Resource
-    IAuthenService authenService;
+    IUserService userService;
 
-    @PostMapping("/login")
-    public ResponseEntity<InfoUserCommand> postLogin(@RequestBody LoginCommand command) {
-        return ResponseEntity.ok(authenService.login(command.username(), command.password()));
+    @PostMapping("/verify")
+    public ResponseEntity<InfoUserCommand> postLogin(@RequestBody VerifyUsernameAndPasswordCommand command) {
+        return ResponseEntity.ok(userService.login(command.username(), command.password()));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/create")
     public ResponseEntity<InfoUserCommand> postRegister(@RequestBody CreateUserCommand command) {
-        return ResponseEntity.ok(authenService.register(command));
+        return ResponseEntity.ok(userService.register(command));
     }
 
     @PostMapping("/info")
     public ResponseEntity<InfoUserCommand> postInfo(@RequestBody String username) {
-        return ResponseEntity.ok(authenService.getUserInfo(username));
+        return ResponseEntity.ok(userService.getUserInfo(username));
     }
 }
