@@ -23,6 +23,7 @@ public class Profile {
 
     @EmbeddedId
     ProfileId id;
+
     @Embedded()
     @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "name"))
     Name name;

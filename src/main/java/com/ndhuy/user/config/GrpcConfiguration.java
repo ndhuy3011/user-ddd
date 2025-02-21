@@ -11,7 +11,6 @@ import net.devh.boot.grpc.server.serverfactory.GrpcServerConfigurer;
 @Configuration
 public class GrpcConfiguration {
     @Bean
-
     public GrpcServerConfigurer keepAliveServerConfigurer() {
         return serverBuilder -> {
             if (serverBuilder instanceof NettyServerBuilder) {

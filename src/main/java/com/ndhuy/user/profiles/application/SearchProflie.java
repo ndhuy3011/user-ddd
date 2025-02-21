@@ -2,16 +2,17 @@ package com.ndhuy.user.profiles.application;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ndhuy.user.UserCase;
 import com.ndhuy.user.profiles.domain.Profile;
 import com.ndhuy.user.profiles.domain.ProfileId;
 import com.ndhuy.user.profiles.domain.ProfileRepository;
 
 import jakarta.annotation.Resource;
 
-@UserCase
+
+@Component
 @Transactional(readOnly = true)
 public class SearchProflie {
     @Resource

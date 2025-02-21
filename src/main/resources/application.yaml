@@ -16,5 +16,18 @@ spring:
     jpa:
         hibernate:
             ddl-auto: update
-    profiles:
-        active: development
+    # profiles:
+    #     active: development
+    security:
+        oauth2:
+            client:
+                registration:
+                    keycloak:
+                        client-id: profile-client
+                        client-secret: YTrPzXkgOLW0tZ4UC2esYvo40x07GOZX # Nếu Access Type là confidential, lấy từ tab Credentials trong Keycloak
+                        authorization-grant-type: authorization_code
+                        redirect-uri: "http://localhost:8081/login/oauth2/code/keycloak"
+                        scope: openid,profile,email
+                provider:
+                    keycloak:
+                        issuer-uri: http://localhost:6969/realms/Web-realm

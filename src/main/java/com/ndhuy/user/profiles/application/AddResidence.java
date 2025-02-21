@@ -2,24 +2,23 @@ package com.ndhuy.user.profiles.application;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.user.IEntitySave;
-import com.ndhuy.user.UserCase;
 import com.ndhuy.user.profiles.domain.Residence;
 import com.ndhuy.user.profiles.domain.ResidenceRepository;
 
 import jakarta.annotation.Resource;
 
-@UserCase
+
+@Component
 @Transactional
 public class AddResidence implements IEntitySave<Residence> {
     @Resource
     private ResidenceRepository residenceRepository;
 
     /**
-     * @param Residence
-     * @return void
      * @ndhuy3011 Add residence
      */
     
@@ -30,7 +29,6 @@ public class AddResidence implements IEntitySave<Residence> {
 
 
     /**
-     * @param Residence
      * @return CompletableFuture<Void>
      * @ndhuy3011 Add residence
      */

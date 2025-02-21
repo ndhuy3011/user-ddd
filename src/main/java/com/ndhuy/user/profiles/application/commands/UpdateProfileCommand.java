@@ -1,8 +1,8 @@
 package com.ndhuy.user.profiles.application.commands;
 
 import java.util.UUID;
+import com.ndhuy.exceptions.BadRequestException;
 
-import com.ndhuy.user.exceptions.BadRequestException;
 
 public record UpdateProfileCommand(UUID id,String name, String email,String avatar) {
     public UpdateProfileCommand {

@@ -2,11 +2,11 @@ package com.ndhuy.user.profiles.infrastructure.persistence;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.ndhuy.aspect.UserCase;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ndhuy.user.exceptions.BadRequestException;
+import com.ndhuy.exceptions.BadRequestException;
 import com.ndhuy.user.profiles.application.AddProfile;
 import com.ndhuy.user.profiles.application.AddResidence;
 import com.ndhuy.user.profiles.application.SearchProflie;
@@ -24,7 +24,7 @@ import com.ndhuy.user.profiles.domain.Residence;
 
 import jakarta.annotation.Resource;
 
-@Service
+@UserCase
 public class ProfileService implements IProfileService {
     @Resource
     private SearchProflie searchProflie;
@@ -41,7 +41,6 @@ public class ProfileService implements IProfileService {
     private SearchResidence searchResidence;
 
     /**
-     * @param SearchProfileCommand
      * @return Profile
      * @ndhuy3011 Search profile if id not null
      */
@@ -59,7 +58,6 @@ public class ProfileService implements IProfileService {
     }
 
     /**
-     * @param CreateUserProfileCommand
      * @return InfoUserCommand
      * @ndhuy3011 Create profile
      */
@@ -75,7 +73,6 @@ public class ProfileService implements IProfileService {
 
     /**
      * 
-     * @param CreateProfileCommand
      * @return Profile
      * @ndhuy3011 Create profile
      */
@@ -90,7 +87,7 @@ public class ProfileService implements IProfileService {
 
     /**
      * 
-     * @param String
+     * @param id
      * @return Profile
      * @ndhuy3011 Search profile if id not null
      */
@@ -99,7 +96,7 @@ public class ProfileService implements IProfileService {
     }
 
     /**
-     * @param SearchProfileCommand
+     * @param command
      * @return Profile
      * @ndhuy3011 Search profile if id, email, name is null
      */
@@ -113,7 +110,6 @@ public class ProfileService implements IProfileService {
     }
 
     /**
-     * @param UpdateProfileCommand
      * @return Profile
      * @ndhuy3011 Update profile
      */
