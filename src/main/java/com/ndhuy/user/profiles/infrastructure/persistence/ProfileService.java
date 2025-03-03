@@ -3,15 +3,13 @@ package com.ndhuy.user.profiles.infrastructure.persistence;
 import java.util.concurrent.CompletableFuture;
 
 import com.ndhuy.aspect.UserCase;
+import com.ndhuy.user.profiles.application.repository.IProfileDao;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.exceptions.BadRequestException;
-import com.ndhuy.user.profiles.application.AddProfile;
 import com.ndhuy.user.profiles.application.AddResidence;
-import com.ndhuy.user.profiles.application.SearchProflie;
 import com.ndhuy.user.profiles.application.SearchResidence;
-import com.ndhuy.user.profiles.application.UpdateProfile;
 import com.ndhuy.user.profiles.application.commands.CreateProfileCommand;
 import com.ndhuy.user.profiles.application.commands.CreateUserProfileCommand;
 import com.ndhuy.user.profiles.application.commands.InfoUserCommand;
@@ -27,13 +25,7 @@ import jakarta.annotation.Resource;
 @UserCase
 public class ProfileService implements IProfileService {
     @Resource
-    private SearchProflie searchProflie;
-
-    @Resource
-    private AddProfile addProfile;
-
-    @Resource
-    private UpdateProfile updateProfile;
+    private IProfileDao profileDao;
     @Resource
     private AddResidence addResidence;
 
@@ -49,10 +41,10 @@ public class ProfileService implements IProfileService {
     public InfoUserCommand getProfileInfo(String id) {
 
         return CompletableFuture.allOf(
-                searchProflie.searchProfileAsync(id),
+                        profileDao.searchProfileAsync(id),
                 searchResidence.searchResidenceAsync(id)).thenApply(
                         ignored -> new InfoUserCommand(
-                                searchProflie.searchProfileAsync(id).join(),
+                                profileDao.searchProfileAsync(id).join(),
                                 searchResidence.searchResidenceAsync(id).join()))
                 .join();
     }
@@ -67,7 +59,7 @@ public class ProfileService implements IProfileService {
         var profile = Profile.create(id, command.profile().name(), command.profile().avatar(),
                 command.profile().email());
         var residence = Residence.create(id, command.residence().title(), command.residence().address());
-        CompletableFuture.allOf(addProfile.executeAsync(profile), addResidence.executeAsync(residence)).join();
+        CompletableFuture.allOf(profileDao.insertProfileAsync(profile), addResidence.executeAsync(residence)).join();
         return new InfoUserCommand(profile, residence);
     }
 
@@ -81,7 +73,7 @@ public class ProfileService implements IProfileService {
     public Profile createProfile(CreateProfileCommand command) {
         var id = ProfileId.fromString(SecurityContextHolder.getContext().getAuthentication().getName());
         var profile = Profile.create(id, command.name(), command.avatar(), command.email());
-        addProfile.execute(profile);
+        profileDao.insertProfile(profile);
         return profile;
     }
 
@@ -92,7 +84,7 @@ public class ProfileService implements IProfileService {
      * @ndhuy3011 Search profile if id not null
      */
     public Profile searchProfile(String id) {
-        return searchProflie.searchProfile(id);
+        return profileDao.searchProfile(id);
     }
 
     /**
@@ -103,7 +95,7 @@ public class ProfileService implements IProfileService {
     @Override
     @Transactional(readOnly = true)
     public Profile searchProfile(SearchProfileCommand command) {
-        return searchProflie.searchProfile(
+        return profileDao.searchProfile(
                 command.id().toString(),
                 command.email(),
                 command.name());
@@ -122,10 +114,10 @@ public class ProfileService implements IProfileService {
             throw new BadRequestException("ERR005");
         }
 
-        var profileOld = searchProflie.searchProfile(command.id().toString());
+        var profileOld = profileDao.searchProfile(command.id().toString());
         var profileNew = new Profile(profileOld);
         profileNew.update(command.name(), command.avatar(), command.email());
-        updateProfile.execute(profileNew);
+        profileDao.updateProfile(profileNew);
 
         return profileNew;
     }
