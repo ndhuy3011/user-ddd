@@ -1,5 +1,6 @@
 package com.ndhuy.user.profiles.infrastructure.controllers;
 
+import com.ndhuy.user.profiles.infrastructure.persistence.IProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import com.ndhuy.user.profiles.application.commands.InfoUserCommand;
 import com.ndhuy.user.profiles.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profiles.application.commands.SearchUserCommand;
 import com.ndhuy.user.profiles.application.commands.UpdateProfileCommand;
-import com.ndhuy.user.profiles.application.interfaces.IProfileService;
 import com.ndhuy.user.profiles.domain.Profile;
 
 import jakarta.annotation.Resource;
@@ -51,7 +51,7 @@ public class ProfileController {
 
     @PostMapping("/search/id")
     public ResponseEntity<Profile> postSearchIdProfile(@RequestBody SearchProfileCommand entity) {
-        return ResponseEntity.ok(profile.searchProfile(entity.id().toString()));
+        return ResponseEntity.ok(profile.searchProfile(entity));
     }
 
 }

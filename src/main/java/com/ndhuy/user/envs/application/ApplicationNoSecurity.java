@@ -1,4 +1,4 @@
-package com.ndhuy.user.config;
+package com.ndhuy.user.envs.application;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -5,12 +5,16 @@ import com.ndhuy.user.profiles.domain.Profile;
 import com.ndhuy.user.profiles.domain.ProfileId;
 import com.ndhuy.user.profiles.domain.ProfileRepository;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.CompletableFuture;
 
+@Transactional
 @Component
-public class ProfileDAO implements IProfileDao {
+@Slf4j
+public class ProfileDao implements IProfileDao {
     @Resource
     ProfileRepository profileRepository;
     /**

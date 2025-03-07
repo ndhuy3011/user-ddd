@@ -1,21 +1,20 @@
-package com.ndhuy.user.profiles.infrastructure.persistence;
+package com.ndhuy.user.profiles.infrastructure.persistence.impl;
 
 import java.util.concurrent.CompletableFuture;
 
 import com.ndhuy.aspect.UserCase;
 import com.ndhuy.user.profiles.application.repository.IProfileDao;
+import com.ndhuy.user.profiles.application.repository.IResidenceDao;
+import com.ndhuy.user.profiles.infrastructure.persistence.IProfileService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ndhuy.exceptions.BadRequestException;
-import com.ndhuy.user.profiles.application.AddResidence;
-import com.ndhuy.user.profiles.application.SearchResidence;
 import com.ndhuy.user.profiles.application.commands.CreateProfileCommand;
 import com.ndhuy.user.profiles.application.commands.CreateUserProfileCommand;
 import com.ndhuy.user.profiles.application.commands.InfoUserCommand;
 import com.ndhuy.user.profiles.application.commands.SearchProfileCommand;
 import com.ndhuy.user.profiles.application.commands.UpdateProfileCommand;
-import com.ndhuy.user.profiles.application.interfaces.IProfileService;
 import com.ndhuy.user.profiles.domain.Profile;
 import com.ndhuy.user.profiles.domain.ProfileId;
 import com.ndhuy.user.profiles.domain.Residence;
@@ -27,10 +26,9 @@ public class ProfileService implements IProfileService {
     @Resource
     private IProfileDao profileDao;
     @Resource
-    private AddResidence addResidence;
+    private IResidenceDao residenceDao;
 
-    @Resource
-    private SearchResidence searchResidence;
+
 
     /**
      * @return Profile
@@ -42,10 +40,10 @@ public class ProfileService implements IProfileService {
 
         return CompletableFuture.allOf(
                         profileDao.searchProfileAsync(id),
-                searchResidence.searchResidenceAsync(id)).thenApply(
+                        residenceDao.searchResidenceAsync(id)).thenApply(
                         ignored -> new InfoUserCommand(
                                 profileDao.searchProfileAsync(id).join(),
-                                searchResidence.searchResidenceAsync(id).join()))
+                                residenceDao.searchResidenceAsync(id).join()))
                 .join();
     }
 
@@ -59,7 +57,7 @@ public class ProfileService implements IProfileService {
         var profile = Profile.create(id, command.profile().name(), command.profile().avatar(),
                 command.profile().email());
         var residence = Residence.create(id, command.residence().title(), command.residence().address());
-        CompletableFuture.allOf(profileDao.insertProfileAsync(profile), addResidence.executeAsync(residence)).join();
+        CompletableFuture.allOf(profileDao.insertProfileAsync(profile), residenceDao.insertResidenceAsync(residence)).join();
         return new InfoUserCommand(profile, residence);
     }
 

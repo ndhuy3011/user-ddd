@@ -1,4 +1,4 @@
-package com.ndhuy.user.config;
+package com.ndhuy.user.gRpc.application.config;
 
 import java.util.concurrent.TimeUnit;
 
